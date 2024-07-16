@@ -17,10 +17,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-brands-svg-icons": "^6.5.2",
+    "@fortawesome/free-regular-svg-icons": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@fortawesome/react-fontawesome": "^0.2.2",
     "@staffbase/widget-sdk": "3.12.8",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "regenerator-runtime": "0.14.1"
+    "regenerator-runtime": "0.14.1",
+    "styled-components": "^6.1.11"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
@@ -68,5 +74,8 @@
     "webpack-dev-server": "^4.5.0",
     "webpack-merge": "^5.8.0"
   },
-  "browserslist": [">0.2%", "not ie < 11"]
+  "browserslist": [
+    ">0.2%",
+    "not ie < 11"
+  ]
 }

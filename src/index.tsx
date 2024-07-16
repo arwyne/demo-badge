@@ -28,7 +28,7 @@ import pkg from "../package.json";
 /**
  * Define which attributes are handled by the widget. This should be also reflected in configuration schema
  */
-const widgetAttributes: string[] = ["message"];
+const widgetAttributes: string[] = [];
 
 /**
  * This factory creates the class which is registered with the tagname in the `custom element registry`

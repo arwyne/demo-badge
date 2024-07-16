@@ -12,7 +12,14 @@
  */
 
 import React, { ReactElement, useEffect, useState } from "react";
-import { SBUserProfile, UserListItem, WidgetApi } from "widget-sdk";
+import { SBUserProfile, WidgetApi } from "widget-sdk";
+import {
+  FontAwesomeIcon,
+  FontAwesomeIconProps,
+} from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+import { getBadgeInfo } from "./helper";
 
 /**
  * React Component
@@ -22,11 +29,16 @@ export interface DemoBadgeProps {
   widgetApi: WidgetApi;
 }
 
-export const DemoBadge = ({
-  message,
-  widgetApi,
-}: DemoBadgeProps): ReactElement => {
-  const [user, setUser] = useState<SBUserProfile | UserListItem[]>();
+type ExtendSBUserProfile = SBUserProfile & {
+  badge?: string;
+};
+
+interface StyledBadgeProps {
+  color: string | null;
+}
+
+export const DemoBadge = ({ widgetApi }: DemoBadgeProps): ReactElement => {
+  const [user, setUser] = useState<ExtendSBUserProfile>();
 
   useEffect(() => {
     widgetApi.getUserInformation().then((info) => {
@@ -34,19 +46,22 @@ export const DemoBadge = ({
     });
   }, []);
 
+  const badgeColor = user?.badge ? getBadgeInfo(user?.badge) : null;
+
   return (
     <>
-      {user ? (
-        <div>
-          <p style={{ marginBottom: 10 }}>All user attributes:</p>
-          <ul>
-            {Object.entries(user).map(([key, value]) => (
-              <li>{`${key}: ${value}`}</li>
-            ))}
-          </ul>
-          <p>{message}</p>
-        </div>
-      ) : null}
+      <StyledBadge
+        icon={faEnvelope}
+        size="xl"
+        className="highlight"
+        color={badgeColor}
+      />
     </>
   );
 };
+
+const StyledBadge = styled(FontAwesomeIcon)<
+  StyledBadgeProps | FontAwesomeIconProps
+>`
+  color: ${({ color }) => color};
+`;
