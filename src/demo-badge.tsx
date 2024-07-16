@@ -13,12 +13,6 @@
 
 import React, { ReactElement, useEffect, useState } from "react";
 import { SBUserProfile, WidgetApi } from "widget-sdk";
-import {
-  FontAwesomeIcon,
-  FontAwesomeIconProps,
-} from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import styled from "styled-components";
 import { getBadgeInfo } from "./helper";
 
 /**
@@ -33,12 +27,20 @@ type ExtendSBUserProfile = SBUserProfile & {
   badge?: string;
 };
 
-interface StyledBadgeProps {
-  color: string | null;
-}
-
-export const DemoBadge = ({ widgetApi }: DemoBadgeProps): ReactElement => {
+export const DemoBadge = ({
+  widgetApi,
+  message,
+}: DemoBadgeProps): ReactElement => {
   const [user, setUser] = useState<ExtendSBUserProfile>();
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
 
   useEffect(() => {
     widgetApi.getUserInformation().then((info) => {
@@ -46,22 +48,30 @@ export const DemoBadge = ({ widgetApi }: DemoBadgeProps): ReactElement => {
     });
   }, []);
 
-  const badgeColor = user?.badge ? getBadgeInfo(user?.badge) : null;
+  const badgeColor = user?.badge ? getBadgeInfo(user?.badge) : "gray";
 
   return (
     <>
-      <StyledBadge
-        icon={faEnvelope}
-        size="xl"
-        className="highlight"
-        color={badgeColor}
-      />
+      <span
+        style={{
+          display: "inline-block",
+          backgroundColor: badgeColor,
+          transform: `scale(${isHovered ? 1.2 : 1})`,
+          transition: "transform .2s",
+          padding: "5px",
+        }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className="test"
+      >
+        {message}
+      </span>
     </>
   );
 };
 
-const StyledBadge = styled(FontAwesomeIcon)<
-  StyledBadgeProps | FontAwesomeIconProps
->`
-  color: ${({ color }) => color};
-`;
+// const StyledBadge = styled(FontAwesomeIcon)<
+//   StyledBadgeProps | FontAwesomeIconProps
+// >`
+//   color: ${({ color }) => color};
+// `;
