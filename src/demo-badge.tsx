@@ -66,8 +66,6 @@ export const DemoBadge = ({
       >
         {message}
       </span>
-
-      <i className="fas fa-camera"></i>
     </>
   );
 };
