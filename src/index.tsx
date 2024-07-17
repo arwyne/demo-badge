@@ -83,7 +83,7 @@ const blockDefinition: BlockDefinition = {
   name: "demo-badge",
   factory: factory,
   attributes: widgetAttributes,
-  blockLevel: "block",
+  blockLevel: "inline",
   configurationSchema: configurationSchema,
   uiSchema: uiSchema,
   label: "Demo Badge",

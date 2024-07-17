@@ -66,12 +66,8 @@ export const DemoBadge = ({
       >
         {message}
       </span>
+
+      <i className="fas fa-camera"></i>
     </>
   );
 };
-
-// const StyledBadge = styled(FontAwesomeIcon)<
-//   StyledBadgeProps | FontAwesomeIconProps
-// >`
-//   color: ${({ color }) => color};
-// `;
